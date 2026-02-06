@@ -1,6 +1,6 @@
 {
+    "name": "HyperBlinds",
 	"id": "hypb",
-	"name": "HyperBlinds",
 	"author": ["cassknows"],
 	"description": "when the blinds are hyper",
 	"prefix": "hypb",
@@ -9,6 +9,6 @@
 	"badge_colour": "00BB22",
 	"version": "1.0.0",
 	"dependencies": [
-        "Steamodded (>= 1.0.0~BETA-1224b)"
+        "Steamodded (>=1.0.0~BETA-1224b)"
     ]
 }
