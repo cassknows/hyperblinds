@@ -14,6 +14,20 @@ return {
             "always draw 1 card",
         }
       },
+      bl_hypb_blind = {
+        name = "HB373 BLIND",
+        text = {
+            "All cards get",
+            "drawn face down",
+        }
+      },
+      bl_hypb_claw = {
+        name = "HB011 CLAW",
+        text = {
+            "Destroys 2 random cards",
+            "in hand per hand played",
+        }
+      },
     },
   },
 }
