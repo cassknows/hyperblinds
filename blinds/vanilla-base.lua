@@ -325,7 +325,7 @@ SMODS.Blind {
     calculate = function(self, blind, context)
         if not blind.disabled then
             if context.hand_drawn then
-                local number_ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "T"}
+                local number_ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T"}
                 for i, v in pairs(context.hand_drawn) do
                     if SMODS.pseudorandom_probability(card, 'sigil', 1, 2) and v:is_face() then
                         v:flip()
