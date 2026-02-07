@@ -45,28 +45,28 @@ return {
         },
       },
       bl_hypb_mace = {
-        name = "HB011 MACE",
+        name = "HB711 MACE",
         text = {
             "Strips modifications",
             "from drawn Clubs",
         },
       },
       bl_hypb_clot = {
-        name = "HB022 CLOT",
+        name = "HB722 CLOT",
         text = {
             "Strips modifications",
             "from drawn Hearts",
         },
       },
       bl_hypb_razor = {
-        name = "HB033 RAZOR",
+        name = "HB733 RAZOR",
         text = {
             "Strips modifications",
             "from drawn Spades",
         },
       },
       bl_hypb_glint = {
-        name = "HB044 GLINT",
+        name = "HB744 GLINT",
         text = {
             "Strips modifications",
             "from drawn Diamonds",
@@ -78,6 +78,14 @@ return {
             "All face cards are",
             "debuffed, convert #1# in #2#",
             "cards into face cards"
+        },
+      },
+      bl_hypb_sigil = {
+        name = "HB033 SIGIL",
+        text = {
+            "All non-face cards are drawn",
+            "face down, convert #1# in #2#",
+            "cards into non-face cards"
         },
       },
     },
