@@ -122,3 +122,35 @@ SMODS.Blind {
         end
     end
 }
+
+
+-- OX : URSA
+SMODS.Blind {
+    key = "ursa",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 2 },
+    boss = { min = 6 },
+    boss_colour = HEX("b95b08"),
+    loc_vars = function(self)
+        return { vars = { -G.GAME.dollars } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { localize('-0') } }
+    end,
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.debuff_hand then
+                blind.triggered = false
+                if context.scoring_name == G.GAME.current_round.most_played_poker_hand then
+                    blind.triggered = true
+                    if not context.check then
+                        ease_dollars(-2*G.GAME.dollars, true) -- `return {dollars = -G.GAME.dollars}` lacks the ability to set the amount instantly
+                        blind:wiggle()
+                    end
+                end
+            end
+        end
+    end
+}

@@ -28,6 +28,14 @@ return {
             "in hand per hand played",
         }
       },
+      bl_hypb_ursa = {
+        name = "HB563 URSA",
+        text = {
+            "Playing a previously",
+            "played hand sets",
+            "money to $#1#",
+        },
+      },
     },
   },
 }
