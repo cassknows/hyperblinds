@@ -146,7 +146,7 @@ SMODS.Blind {
                 if G.GAME.hands[context.scoring_name].played > 1 then
                     blind.triggered = true
                     if not context.check then
-                        ease_dollars(-2*G.GAME.dollars, true) -- `return {dollars = -G.GAME.dollars}` lacks the ability to set the amount instantly
+                        ease_dollars(-G.GAME.dollars - G.GAME.hypb_ante_dollars, true) -- `return {dollars = -G.GAME.dollars}` lacks the ability to set the amount instantly
                         blind:wiggle()
                     end
                 end
