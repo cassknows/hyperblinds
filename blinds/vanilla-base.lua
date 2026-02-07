@@ -143,7 +143,7 @@ SMODS.Blind {
         if not blind.disabled then
             if context.debuff_hand then
                 blind.triggered = false
-                if context.scoring_name == G.GAME.current_round.most_played_poker_hand then
+                if G.GAME.hands[context.scoring_name].played > 1 then
                     blind.triggered = true
                     if not context.check then
                         ease_dollars(-2*G.GAME.dollars, true) -- `return {dollars = -G.GAME.dollars}` lacks the ability to set the amount instantly
