@@ -293,16 +293,13 @@ SMODS.Blind {
                 for i, v in pairs(context.hand_drawn) do
                     if SMODS.pseudorandom_probability(card, 'evergreen', 1, 2) then
                         SMODS.change_base(v, nil, pseudorandom_element(faces, pseudoseed("evergreen")), nil)
-                        if v:is_face() then
-                            v:set_debuff(true)
-                        end
                     end
                 end
             end
         end
     end,
     recalc_debuff = function(self, card, from_blind)
-    if card:is_face() then
+    if card:is_face(true) then
         return true
     end
     return false
