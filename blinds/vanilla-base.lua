@@ -163,11 +163,107 @@ SMODS.Blind {
     mult = 0.5,
     atlas = "blinds",
     pos = { x = 0, y = 5 },
-    boss = { min = 1 },
+    boss = { min = 9 },
     boss_colour = HEX("61289b"),
     defeat = function(self)
         if not G.GAME.blind.disabled then
             G.GAME.round_resets.hands = G.GAME.round_resets.hands - G.GAME.current_round.hands_left
         end
     end
+}
+
+-- CLUB : MACE
+SMODS.Blind {
+    key = "mace",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 6 },
+    boss = { min = 9 },
+    boss_colour = HEX("16c099"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Clubs") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
+-- HEAD : CLOT
+SMODS.Blind {
+    key = "clot",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 7 },
+    boss = { min = 9 },
+    boss_colour = HEX("e02bd3"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Hearts") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
+-- GOAD : RAZOR
+SMODS.Blind {
+    key = "razor",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 8 },
+    boss = { min = 9 },
+    boss_colour = HEX("69677a"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Spades") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
+-- WINDOW : GLINT
+SMODS.Blind {
+    key = "glint",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 9 },
+    boss = { min = 9 },
+    boss_colour = HEX("ebb700"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Diamonds") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
 }

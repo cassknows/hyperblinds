@@ -44,6 +44,34 @@ return {
             "this blind",
         },
       },
+      bl_hypb_mace = {
+        name = "HB611 MACE",
+        text = {
+            "Strips modifications",
+            "from drawn Clubs",
+        },
+      },
+      bl_hypb_clot = {
+        name = "HB622 CLOT",
+        text = {
+            "Strips modifications",
+            "from drawn Hearts",
+        },
+      },
+      bl_hypb_razor = {
+        name = "HB633 RAZOR",
+        text = {
+            "Strips modifications",
+            "from drawn Spades",
+        },
+      },
+      bl_hypb_glint = {
+        name = "HB644 GLINT",
+        text = {
+            "Strips modifications",
+            "from drawn Diamonds",
+        },
+      },
     },
   },
 }
