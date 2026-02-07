@@ -146,11 +146,28 @@ SMODS.Blind {
                 if G.GAME.hands[context.scoring_name].played > 1 then
                     blind.triggered = true
                     if not context.check then
-                        ease_dollars(-G.GAME.dollars - G.GAME.hypb_ante_dollars, true) -- `return {dollars = -G.GAME.dollars}` lacks the ability to set the amount instantly
+                        ease_dollars(-G.GAME.dollars - G.GAME.hypb_ante_dollars, true)
                         blind:wiggle()
                     end
                 end
             end
+        end
+    end
+}
+
+
+-- NEEDLE : THREAD
+SMODS.Blind {
+    key = "thread",
+    dollars = 5,
+    mult = 0.5,
+    atlas = "blinds",
+    pos = { x = 0, y = 5 },
+    boss = { min = 1 },
+    boss_colour = HEX("61289b"),
+    defeat = function(self)
+        if not G.GAME.blind.disabled then
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands - G.GAME.current_round.hands_left
         end
     end
 }

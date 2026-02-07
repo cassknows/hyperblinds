@@ -36,6 +36,14 @@ return {
             "money to $#1#",
         },
       },
+      bl_hypb_thread = {
+        name = "HB977 THREAD",
+        text = {
+            "Unspent Hands are",
+            "removed after defeating",
+            "this blind",
+        },
+      },
     },
   },
 }
