@@ -305,3 +305,49 @@ SMODS.Blind {
     return false
 end,
 }
+
+-- MARK : SIGIL
+SMODS.Blind {
+    key = "sigil",
+    dollars = 5,
+    mult = 2,
+    pos = { x = 0, y = 11 },
+    boss = { min = 2 },
+    boss_colour = HEX("50bf7c"),
+    loc_vars = function(self)
+        local numerator, denominator = SMODS.get_probability_vars(self, 1, 2, 'sigil')
+        return { vars = { numerator, denominator } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '1' } }
+    end,
+    
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.hand_drawn then
+                local number_ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "T"}
+                for i, v in pairs(context.hand_drawn) do
+                    if SMODS.pseudorandom_probability(card, 'sigil', 1, 2) and v:is_face() then
+                        SMODS.change_base(v, nil, pseudorandom_element(number_ranks, pseudoseed("sigil")), nil)
+                    end
+                end
+            end
+            if context.stay_flipped and context.to_area == G.hand and
+                not context.other_card:is_face() then
+                return {
+                    stay_flipped = true
+                }
+            end
+        end
+    end,
+    disable = function(self)
+        for i = 1, #G.hand.cards do
+            if G.hand.cards[i].facing == 'back' then
+                G.hand.cards[i]:flip()
+            end
+        end
+        for _, playing_card in pairs(G.playing_cards) do
+            playing_card.ability.wheel_flipped = nil
+        end
+    end
+}
