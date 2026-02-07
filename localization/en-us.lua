@@ -45,31 +45,39 @@ return {
         },
       },
       bl_hypb_mace = {
-        name = "HB611 MACE",
+        name = "HB011 MACE",
         text = {
             "Strips modifications",
             "from drawn Clubs",
         },
       },
       bl_hypb_clot = {
-        name = "HB622 CLOT",
+        name = "HB022 CLOT",
         text = {
             "Strips modifications",
             "from drawn Hearts",
         },
       },
       bl_hypb_razor = {
-        name = "HB633 RAZOR",
+        name = "HB033 RAZOR",
         text = {
             "Strips modifications",
             "from drawn Spades",
         },
       },
       bl_hypb_glint = {
-        name = "HB644 GLINT",
+        name = "HB044 GLINT",
         text = {
             "Strips modifications",
             "from drawn Diamonds",
+        },
+      },
+      bl_hypb_evergreen = {
+        name = "HB313 EVERGREEN",
+        text = {
+            "All face cards are",
+            "debuffed, convert #1# in #2#",
+            "cards into face cards"
         },
       },
     },

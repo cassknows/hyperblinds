@@ -267,3 +267,44 @@ SMODS.Blind {
         end
     end,
 }
+
+
+-- PLANT : EVERGREEN
+SMODS.Blind {
+    key = "evergreen",
+    dollars = 5,
+    mult = 2,
+    debuff = { is_face = true },
+    atlas = "blinds",
+    pos = { x = 0, y = 10 },
+    boss = { min = 9 },
+    boss_colour = HEX("135a3b"),
+    loc_vars = function(self)
+        --local numerator, denominator = SMODS.get_probability_vars(self, num, den, 'evergreen')
+        return { vars = { '1', '2' } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '1', '2' } }
+    end,
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                local faces = {"Jack", "Queen", "King"}
+                for i, v in pairs(context.hand_drawn) do
+                    if SMODS.pseudorandom_probability(card, 'evergreen', 1, 2) then
+                        SMODS.change_base(v, nil, pseudorandom_element(faces, pseudoseed("evergreen")), nil)
+                        if v:is_face() then
+                            v:set_debuff(true)
+                        end
+                    end
+                end
+            end
+        end
+    end,
+    recalc_debuff = function(self, card, from_blind)
+    if card:is_face() then
+        return true
+    end
+    return false
+end,
+}
