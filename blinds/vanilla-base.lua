@@ -130,14 +130,14 @@ SMODS.Blind {
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 2 },
-    boss = { min = 6 },
-    boss_colour = HEX("b95b08"),
+    pos = { x = 0, y = 4 },
+    boss = { min = 9 },
+    boss_colour = HEX("6f4a09"),
     loc_vars = function(self)
-        return { vars = { -G.GAME.dollars } }
+        return { vars = { -G.GAME.hypb_ante_dollars } }
     end,
     collection_loc_vars = function(self)
-        return { vars = { localize('-0') } }
+        return { vars = { 'negative' } }
     end,
     calculate = function(self, blind, context)
         if not blind.disabled then

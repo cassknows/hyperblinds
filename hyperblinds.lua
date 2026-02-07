@@ -9,10 +9,11 @@ SMODS.Atlas {
   atlas_table = "ANIMATION_ATLAS"
 }
 
-SMODS.current_mod.reset_game_globals(run_start)
+SMODS.current_mod.reset_game_globals = function(run_start)
   if run_start then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
   end
+end
 
 SMODS.current_mod.calculate = function(self, context)
   if context.ante_change then
