@@ -19,14 +19,13 @@ SMODS.current_mod.calculate = function(self, context)
   if context.ante_change then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
   end
+  if context.individual and (context.cardarea == G.play or context.cardarea == "unscored") then
+    context.other_card.ability.marble_played_ever = true
+  end
 end
 
 SMODS.current_mod.calculate = function(self, context)
-  if context.press_play then
-    for i = 1, #G.play.cards do
-      G.play.cards[i].ability.marble_played_ever = true
-    end
-  end
+  
 end
 
 local blind_files = NFS.getDirectoryItems(SMODS.current_mod.path .. "blinds")
