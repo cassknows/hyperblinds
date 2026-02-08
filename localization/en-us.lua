@@ -110,6 +110,14 @@ return {
             "are set to 0"
         },
       },
+      bl_hypb_scapula = {
+        name = "HB641 SCAPULA",
+        text = {
+            "On Play or Discard",
+            "decrease level of",
+            "other poker hands"
+        },
+      },
     },
   },
 }

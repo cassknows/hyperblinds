@@ -5,7 +5,7 @@
 	"description": "when the blinds are hyper",
 	"prefix": "hypb",
 	"main_file": "hyperblinds.lua",
-	"priority": 4321,
+	"priority": 28,
 	"badge_colour": "00BB22",
 	"version": "1.0.0",
 	"dependencies": [

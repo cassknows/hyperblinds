@@ -419,3 +419,83 @@ SMODS.Blind {
         end
     end
 }
+
+-- ARM : SCAPULA
+SMODS.Blind {
+    key = "scapula",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 15 },
+    boss = { min = 2 },
+    boss_colour = HEX("4e7f84"),
+    calculate = function(self, blind, context)
+        if context.pre_discard and not blind.disabled then
+            local handtab = {}
+            for k, v in pairs(G.GAME.hands) do
+                if k ~= G.FUNCS.get_poker_hand_info(G.hand.highlighted) then
+                    table.insert(handtab, k)
+                end
+            end
+            SMODS.upgrade_poker_hands{
+                level_up = -1,
+                instant = true,
+                hands = handtab
+            }
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname='Other Hands',chips = '...', mult = '...', level=''})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = true
+                return true end }))
+            update_hand_text({delay = 0}, {mult = '-', StatusText = true})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                return true end }))
+            update_hand_text({delay = 0}, {chips = '-', StatusText = true})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = nil
+                return true end }))
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='-1'})
+            delay(1.3)
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+        end
+        if context.before and not blind.disabled then
+            local handtab = {}
+            for k, v in pairs(G.GAME.hands) do
+                if k ~= context.scoring_name then
+                    table.insert(handtab, k)
+                end
+            end
+            SMODS.upgrade_poker_hands{
+                level_up = -1,
+                instant = true,
+                hands = handtab
+            }
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 0.8, delay = 0.3}, {handname='Other Hands',chips = '...', mult = '...', level=''})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.2, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = true
+                return true end }))
+            update_hand_text({delay = 0}, {mult = '-', StatusText = true})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                return true end }))
+            update_hand_text({delay = 0}, {chips = '-', StatusText = true})
+            G.E_MANAGER:add_event(Event({trigger = 'after', delay = 0.9, func = function()
+                play_sound('tarot1')
+                --self:jiggle(0.8, 0.5)
+                G.TAROT_INTERRUPT_PULSE = nil
+                return true end }))
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 0.9, delay = 0}, {level='-1'})
+            delay(1.3)
+            update_hand_text({sound = 'button', volume = 0.7, pitch = 1.1, delay = 0}, {mult = 0, chips = 0, handname = '', level = ''})
+        end
+    end
+}
+
