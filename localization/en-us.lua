@@ -96,6 +96,13 @@ return {
             "when scored"
         },
       },
+      bl_hypb_marble = {
+        name = "HB926 MARBLE",
+        text = {
+            "Cards played previously",
+            "are Debuffed"
+        },
+      },
     },
   },
 }

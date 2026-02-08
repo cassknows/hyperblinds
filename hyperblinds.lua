@@ -24,10 +24,6 @@ SMODS.current_mod.calculate = function(self, context)
   end
 end
 
-SMODS.current_mod.calculate = function(self, context)
-  
-end
-
 local blind_files = NFS.getDirectoryItems(SMODS.current_mod.path .. "blinds")
 
 for _, file in ipairs(blind_files) do
