@@ -88,6 +88,14 @@ return {
             "cards into non-face cards"
         },
       },
+      bl_hypb_fang = {
+        name = "HB555 FANG",
+        text = {
+            "Cards gain",
+            "\"-1$ when scored\"",
+            "when scored"
+        },
+      },
     },
   },
 }

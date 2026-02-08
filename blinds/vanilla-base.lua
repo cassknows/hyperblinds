@@ -355,3 +355,19 @@ SMODS.Blind {
         end
     end
 }
+
+-- TOOTH : FANG
+SMODS.Blind {
+    key = "fang",
+	dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 12 },
+    boss = { min = 9 },
+	boss_colour = HEX("f7110e"),
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
+			context.other_card.ability.perma_p_dollars = (context.other_card.ability.perma_p_dollars - 1) or -1
+		end
+	end
+}
