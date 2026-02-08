@@ -398,3 +398,24 @@ SMODS.Blind {
         end
     end
 }
+
+-- FLINT : QUARTZ
+SMODS.Blind {
+    key = "quartz",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 14 },
+    boss = { min = 9 },
+    boss_colour = HEX("8d527c"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.modify_hand then
+                blind.triggered = true
+                mult = mod_mult(0)
+                hand_chips = mod_chips(0)
+                update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
+            end
+        end
+    end
+}

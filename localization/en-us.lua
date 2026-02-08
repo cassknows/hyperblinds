@@ -103,6 +103,13 @@ return {
             "are Debuffed"
         },
       },
+      bl_hypb_quartz = {
+        name = "HB510 QUARTZ",
+        text = {
+            "Base Chips and Mult",
+            "are set to 0"
+        },
+      },
     },
   },
 }
