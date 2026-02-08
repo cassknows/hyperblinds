@@ -21,6 +21,14 @@ SMODS.current_mod.calculate = function(self, context)
   end
 end
 
+SMODS.current_mod.calculate = function(self, context)
+  if context.press_play then
+    for i = 1, #G.play.cards do
+      G.play.cards[i].ability.marble_played_ever = true
+    end
+  end
+end
+
 local blind_files = NFS.getDirectoryItems(SMODS.current_mod.path .. "blinds")
 
 for _, file in ipairs(blind_files) do

@@ -371,3 +371,30 @@ SMODS.Blind {
 		end
 	end
 }
+
+-- PILLAR : MARBLE
+SMODS.Blind {
+    key = "marble",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 13 },
+    boss = { min = 9 },
+    boss_colour = HEX("cbbcba"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v.ability.marble_played_ever then
+                        v:set_debuff(true)
+                    end
+                end
+            end
+        end
+    end,
+    recalc_debuff = function(self, card)
+        if card.ability.marble_played_ever then
+            return true
+        end
+    end
+}
