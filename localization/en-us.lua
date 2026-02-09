@@ -142,6 +142,13 @@ return {
             "drawn face down in the future"
         },
       },
+      bl_hypb_tar = {
+        name = "HB654 TAR",
+        text = {
+            "-2 hand size, permanently",
+            "-1 hand size after hand played"
+        },
+      },
     },
   },
 }

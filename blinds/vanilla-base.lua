@@ -611,3 +611,32 @@ SMODS.Blind {
         end
     end
 }
+
+-- MANACLE : TAR
+SMODS.Blind {
+    key = "tar",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 19 },
+    boss = { min = 9 },
+    boss_colour = HEX("1e1e0e"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind then
+                G.hand:change_size(-2)
+            end
+            if context.press_play then
+                G.hand:change_size(-1)
+            end
+        end
+    end,
+    disable = function(self)
+        G.hand:change_size(2)
+    end,
+    defeat = function(self)
+        if not G.GAME.blind.disabled then
+            G.hand:change_size(3)
+        end
+    end
+}
