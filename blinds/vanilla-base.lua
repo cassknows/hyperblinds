@@ -517,6 +517,7 @@ SMODS.Blind {
             end
             if context.pre_discard and not activated then
                 SMODS.change_discard_limit(-1)
+                activated = true
             end
         end
     end,
