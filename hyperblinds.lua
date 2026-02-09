@@ -22,6 +22,18 @@ SMODS.current_mod.calculate = function(self, context)
   if context.individual and (context.cardarea == G.play or context.cardarea == "unscored") then
     context.other_card.ability.marble_played_ever = true
   end
+  if context.hand_drawn then
+    for i, v in pairs(context.hand_drawn) do
+      if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back"then
+        v:flip()
+      end
+    end
+  end
+  if context.stay_flipped and context.other_card.sometimes_face_down then
+    return {
+      stay_flipped = true
+    }
+  end
 end
 
 local blind_files = NFS.getDirectoryItems(SMODS.current_mod.path .. "blinds")

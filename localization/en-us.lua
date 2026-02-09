@@ -100,7 +100,7 @@ return {
         name = "HB926 MARBLE",
         text = {
             "Cards played previously",
-            "are Debuffed"
+            "are debuffed"
         },
       },
       bl_hypb_quartz = {
@@ -124,6 +124,22 @@ return {
             "+1 Discard, -2 Hand Size,",
             "After Discard, permanently",
             "discard 1 fewer card"
+        },
+      },
+      bl_hypb_polis = {
+        name = "HB323 POLIS",
+        text = {
+            "First hand is drawn face",
+            "down, these cards may be",
+            "drawn face down in the future"
+        },
+      },
+      bl_hypb_esca = {
+        name = "HB354 ESCA",
+        text = {
+            "Cards drawn face down after each",
+            "hand played, these cards may be",
+            "drawn face down in the future"
         },
       },
     },

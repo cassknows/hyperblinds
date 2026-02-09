@@ -509,8 +509,8 @@ SMODS.Blind {
     boss = { min = 9 },
     boss_colour = HEX("0bebdf"),
     calculate = function(self, blind, context)
+        local activated = false
         if not blind.disabled then
-            local activated = false
             if context.setting_blind then
                 ease_discard(1)
                 G.hand:change_size(-2)
@@ -531,6 +531,83 @@ SMODS.Blind {
     defeat = function(self)
         if not G.GAME.blind.disabled then
             G.hand:change_size(2)
+        end
+    end
+}
+
+-- HOUSE : POLIS
+SMODS.Blind {
+    key = "polis",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 17 },
+    boss = { min = 9 },
+    boss_colour = HEX("867860"),
+    calculate = function(self, blind, context)
+        if not blind.disabled and context.hand_drawn and G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
+            for i, v in pairs(context.hand_drawn) do
+                G.hand.cards[i].ability.sometimes_face_down = true
+            end
+        end
+        if not blind.disabled then
+            if context.stay_flipped and context.to_area == G.hand and
+                G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
+                return {
+                    stay_flipped = true
+                }
+            end
+        end
+    end,
+    disable = function(self)
+        for i = 1, #G.hand.cards do
+            if G.hand.cards[i].facing == 'back' then
+                G.hand.cards[i]:flip()
+            end
+        end
+        for _, playing_card in pairs(G.playing_cards) do
+            playing_card.ability.wheel_flipped = nil
+        end
+    end
+}
+
+-- FISH : ESCA
+SMODS.Blind {
+    key = "esca",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 18 },
+    boss = { min = 9 },
+    boss_colour = HEX("0e0a51"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.press_play then
+                blind.prepped = true
+            end
+            if context.hand_drawn and blind.prepped then
+                for i, v in pairs(context.hand_drawn) do
+                    v.ability.sometimes_face_down = true
+                end
+            end
+            if context.stay_flipped and context.to_area == G.hand and blind.prepped then
+                return {
+                    stay_flipped = true
+                }
+            end
+        end
+        if context.setting_blind or context.hand_drawn then
+            blind.prepped = nil
+        end
+    end,
+    disable = function(self)
+        for i = 1, #G.hand.cards do
+            if G.hand.cards[i].facing == 'back' then
+                G.hand.cards[i]:flip()
+            end
+        end
+        for _, playing_card in pairs(G.playing_cards) do
+            playing_card.ability.wheel_flipped = nil
         end
     end
 }
