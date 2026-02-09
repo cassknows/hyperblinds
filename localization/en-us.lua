@@ -149,6 +149,12 @@ return {
             "-1 hand size after hand played"
         },
       },
+      bl_hypb_seer = {
+        name = "HB504 SEER",
+        text = {
+            "Must play #1# cards"
+        },
+      },
     },
   },
 }

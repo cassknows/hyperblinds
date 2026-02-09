@@ -15,6 +15,8 @@ SMODS.current_mod.reset_game_globals = function(run_start)
   end
 end
 
+hand_discard_sum = 7
+
 SMODS.current_mod.calculate = function(self, context)
   if context.ante_change then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
@@ -23,6 +25,7 @@ SMODS.current_mod.calculate = function(self, context)
     context.other_card.ability.marble_played_ever = true
   end
   if context.hand_drawn then
+    hand_discard_sum = G.GAME.current_round.discards_left + G.GAME.current_round.hands_left
     for i, v in pairs(context.hand_drawn) do
       if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back"then
         v:flip()

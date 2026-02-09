@@ -640,3 +640,31 @@ SMODS.Blind {
         end
     end
 }
+
+
+-- PSYCHIC : SEER
+SMODS.Blind {
+    key = "seer",
+    dollars = 5,
+    mult = 2,
+    --debuff = { h_size_ge = hand_discard_sum },
+    atlas = "blinds",
+    pos = { x = 0, y = 20 },
+    boss = { min = 9 },
+    boss_colour = HEX("ffa400"),
+    loc_vars = function()
+        return { vars = { G.GAME.current_round.discards_left + G.GAME.current_round.hands_left}}
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '[hands] + [discards]' } }
+    end,
+    debuff_hand = function(self, cards, hand, handname, check)
+        G.GAME.blind:set_text()
+        local offset = 0
+        if G.STATE == G.STATES.HAND_PLAYED then
+            offset = 1
+        end
+        if #cards ~= (G.GAME.current_round.discards_left + G.GAME.current_round.hands_left + offset) then return true end
+        return false
+    end
+}
