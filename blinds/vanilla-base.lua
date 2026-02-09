@@ -42,7 +42,7 @@ SMODS.Blind {
     atlas = "blinds",
     pos = { x = 0, y = 2 },
     boss = { min = 9 },
-    boss_colour = HEX("22100b"),
+    boss_colour = HEX("5e0808"),
     calculate = function(self, blind, context)
         if not blind.disabled then
             if context.stay_flipped and context.to_area == G.hand then
@@ -427,7 +427,7 @@ SMODS.Blind {
     mult = 2,
     atlas = "blinds",
     pos = { x = 0, y = 15 },
-    boss = { min = 2 },
+    boss = { min = 9 },
     boss_colour = HEX("4e7f84"),
     calculate = function(self, blind, context)
         if context.pre_discard and not blind.disabled then
@@ -499,3 +499,37 @@ SMODS.Blind {
     end
 }
 
+-- WATER : ALKAHEST
+SMODS.Blind {
+    key = "alkahest",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 16 },
+    boss = { min = 9 },
+    boss_colour = HEX("0bebdf"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            local activated = false
+            if context.setting_blind then
+                ease_discard(1)
+                G.hand:change_size(-2)
+            end
+            if context.pre_discard and not activated then
+                SMODS.change_discard_limit(-1)
+            end
+        end
+    end,
+    disable = function(self)
+        ease_discard(-1)
+        G.hand:change_size(2)
+        if activated then
+            SMODS.change_discard_limit(1)
+        end
+    end,
+    defeat = function(self)
+        if not G.GAME.blind.disabled then
+            G.hand:change_size(2)
+        end
+    end
+}

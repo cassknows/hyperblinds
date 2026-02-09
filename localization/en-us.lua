@@ -118,6 +118,14 @@ return {
             "other poker hands"
         },
       },
+      bl_hypb_alkahest = {
+        name = "HB050 ALKAHEST",
+        text = {
+            "+1 Discard, -2 Hand Size,",
+            "After Discard, permanently",
+            "discard 1 fewer card"
+        },
+      },
     },
   },
 }
