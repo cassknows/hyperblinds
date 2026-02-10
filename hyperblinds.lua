@@ -1,5 +1,3 @@
-
-
 SMODS.Atlas {
   key = "blinds",
   px = 34,
@@ -8,6 +6,13 @@ SMODS.Atlas {
   frames = 1,
   atlas_table = "ANIMATION_ATLAS"
 }
+
+SMODS.Atlas {
+    key = "modicon",
+    path = "hypb_ico.png",
+    px = 34,
+    py = 34,
+}:register()
 
 function prand(str)
     local h = 31
