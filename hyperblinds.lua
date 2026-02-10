@@ -59,7 +59,7 @@ SMODS.current_mod.calculate = function(self, context)
     se_carry = prand(context.scoring_name .. tostring(context.scoring_name.played) .. tostring(se_carry) .. tostring(G.GAME.round_resets.ante))
   end
   if context.debuff_hand then
-    if iris_hands[context.scoring_name] == true and context.scoring_name then
+    if context.scoring_name and iris_hands[context.scoring_name] ~= nil then
       if se_carry < 0.1666 then
         return {
           debuff = true,
