@@ -668,3 +668,37 @@ SMODS.Blind {
         return false
     end
 }
+
+-- MOUTH : FLYTRAP
+SMODS.Blind {
+    key = "flytrap",
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 21 },
+    boss = { min = 9 },
+    boss_colour = HEX("a0de14"),
+    get_loc_debuff_text = function(self)
+        return G.GAME.blind.loc_debuff_text ..
+            (G.GAME.blind.only_hand and ' [' .. localize(G.GAME.blind.only_hand, 'poker_hands') .. ']' or '')
+    end,
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind then
+                blind.only_hand = false
+            end
+            if context.debuff_hand then
+                if blind.only_hand and blind.only_hand ~= context.scoring_name then
+                    blind.triggered = true
+                    return {
+                        debuff = true
+                    }
+                end
+                if not context.check then
+                    blind.only_hand = context.scoring_name
+                    flytrap_hands[context.scoring_name] = true
+                end
+            end
+        end
+    end
+}

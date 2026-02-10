@@ -155,6 +155,14 @@ return {
             "Must play #1# cards"
         },
       },
+      bl_hypb_flytrap = {
+        name = "HB923 FLYTRAP",
+        text = {
+            "Only play 1 hand type this",
+            "round, played hand type",
+            "permanently costs 1 extra Hand"
+        },
+      },
     },
   },
 }
