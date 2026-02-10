@@ -37,7 +37,7 @@ return {
         },
       },
       bl_hypb_thread = {
-        name = "HB977 THREAD",
+        name = "HB277 THREAD",
         text = {
             "Unspent Hands are",
             "removed after defeating",
@@ -161,6 +161,14 @@ return {
             "Only play 1 hand type this",
             "round, played hand type",
             "permanently costs 1 extra Hand"
+        },
+      },
+      bl_hypb_iris = {
+        name = "HB145 IRIS",
+        text = {
+            "No repeat hand types this",
+            "round, played hand types",
+            "might not score this run"
         },
       },
     },

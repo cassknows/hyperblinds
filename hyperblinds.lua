@@ -9,10 +9,21 @@ SMODS.Atlas {
   atlas_table = "ANIMATION_ATLAS"
 }
 
+function prand(str)
+    local h = 31
+    for i = 1, #str do
+       h = math.fmod(h*32 + h + str:byte(i), 65536)
+    end
+    return h/65536
+end
+
+local se_carry = 0.918772
+
 SMODS.current_mod.reset_game_globals = function(run_start)
   if run_start then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
     flytrap_hands = {}
+    iris_hands = {}
   end
 end
 
@@ -38,6 +49,19 @@ SMODS.current_mod.calculate = function(self, context)
   end
   if context.before and flytrap_hands[context.scoring_name] then
       G.GAME.current_round.hands_left = G.GAME.current_round.hands_left - 1
+  end
+  if context.after then
+    se_carry = prand(context.scoring_name .. tostring(context.scoring_name.played) .. tostring(se_carry) .. tostring(G.GAME.round_resets.ante))
+  end
+  if context.debuff_hand then
+    if iris_hands[context.scoring_name] == true and context.scoring_name then
+      if se_carry < 0.1666 then
+        return {
+          debuff = true,
+          debuff_text = "IRIS is watching"
+        }
+      end
+    end
   end
 end
 

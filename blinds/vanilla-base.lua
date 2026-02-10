@@ -1,6 +1,7 @@
 -- WALL : SUMMIT
 SMODS.Blind {
     key = "summit",
+    order = 4,
     dollars = 5,
     mult = 18,
     atlas = "blinds",
@@ -16,6 +17,7 @@ SMODS.Blind {
 -- SERPENT : CONSTRICTOR
 SMODS.Blind {
     key = "constrictor",
+    order = 17,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -37,6 +39,7 @@ SMODS.Blind {
 -- WHEEL : BLIND
 SMODS.Blind {
     key = "blind",
+    order = 5,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -67,6 +70,7 @@ SMODS.Blind {
 -- HOOK : CLAW
 SMODS.Blind {
     key = "claw",
+    order = 1,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -127,6 +131,7 @@ SMODS.Blind {
 -- OX : URSA
 SMODS.Blind {
     key = "ursa",
+    order = 2,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -159,6 +164,7 @@ SMODS.Blind {
 -- NEEDLE : THREAD
 SMODS.Blind {
     key = "thread",
+    order = 19,
     dollars = 5,
     mult = 0.5,
     atlas = "blinds",
@@ -175,6 +181,7 @@ SMODS.Blind {
 -- CLUB : MACE
 SMODS.Blind {
     key = "mace",
+    order = 7,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -199,6 +206,7 @@ SMODS.Blind {
 -- HEAD : CLOT
 SMODS.Blind {
     key = "clot",
+    order = 20,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -223,6 +231,7 @@ SMODS.Blind {
 -- GOAD : RAZOR
 SMODS.Blind {
     key = "razor",
+    order = 10,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -247,6 +256,7 @@ SMODS.Blind {
 -- WINDOW : GLINT
 SMODS.Blind {
     key = "glint",
+    order = 12,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -272,6 +282,7 @@ SMODS.Blind {
 -- PLANT : EVERGREEN
 SMODS.Blind {
     key = "evergreen",
+    order = 16,
     dollars = 5,
     mult = 2,
     debuff = { is_face = true },
@@ -280,7 +291,6 @@ SMODS.Blind {
     boss = { min = 9 },
     boss_colour = HEX("135a3b"),
     loc_vars = function(self)
-        --local numerator, denominator = SMODS.get_probability_vars(self, num, den, 'evergreen')
         return { vars = { '1', '2' } }
     end,
     collection_loc_vars = function(self)
@@ -309,6 +319,7 @@ end,
 -- MARK : SIGIL
 SMODS.Blind {
     key = "sigil",
+    order = 23,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -359,6 +370,7 @@ SMODS.Blind {
 -- TOOTH : FANG
 SMODS.Blind {
     key = "fang",
+    order = 21,
 	dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -375,6 +387,7 @@ SMODS.Blind {
 -- PILLAR : MARBLE
 SMODS.Blind {
     key = "marble",
+    order = 18,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -402,6 +415,7 @@ SMODS.Blind {
 -- FLINT : QUARTZ
 SMODS.Blind {
     key = "quartz",
+    order = 22,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -423,6 +437,7 @@ SMODS.Blind {
 -- ARM : SCAPULA
 SMODS.Blind {
     key = "scapula",
+    order = 6,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -502,6 +517,7 @@ SMODS.Blind {
 -- WATER : ALKAHEST
 SMODS.Blind {
     key = "alkahest",
+    order = 11,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -538,6 +554,7 @@ SMODS.Blind {
 -- HOUSE : POLIS
 SMODS.Blind {
     key = "polis",
+    order = 3,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -574,6 +591,7 @@ SMODS.Blind {
 -- FISH : ESCA
 SMODS.Blind {
     key = "esca",
+    order = 8,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -615,6 +633,7 @@ SMODS.Blind {
 -- MANACLE : TAR
 SMODS.Blind {
     key = "tar",
+    order = 13,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -645,9 +664,9 @@ SMODS.Blind {
 -- PSYCHIC : SEER
 SMODS.Blind {
     key = "seer",
+    order = 9,
     dollars = 5,
     mult = 2,
-    --debuff = { h_size_ge = hand_discard_sum },
     atlas = "blinds",
     pos = { x = 0, y = 20 },
     boss = { min = 9 },
@@ -672,6 +691,7 @@ SMODS.Blind {
 -- MOUTH : FLYTRAP
 SMODS.Blind {
     key = "flytrap",
+    order = 15,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
@@ -697,6 +717,41 @@ SMODS.Blind {
                 if not context.check then
                     blind.only_hand = context.scoring_name
                     flytrap_hands[context.scoring_name] = true
+                end
+            end
+        end
+    end
+}
+
+
+-- EYE : IRIS
+SMODS.Blind {
+    key = "iris",
+    order = 14,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 22 },
+    boss = { min = 9 },
+    boss_colour = HEX("4b71e4"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind then
+                blind.hands = {}
+                for _, poker_hand in ipairs(G.handlist) do
+                    blind.hands[poker_hand] = false
+                end
+            end
+            if context.debuff_hand then
+                if blind.hands[context.scoring_name] then
+                    blind.triggered = true
+                    return {
+                        debuff = true
+                    }
+                end
+                if not context.check then
+                    blind.hands[context.scoring_name] = true
+                    iris_hands[context.scoring_name] = true
                 end
             end
         end
