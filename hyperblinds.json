@@ -1,13 +1,13 @@
 {
-    "name": "HyperBlinds",
+    "name": "Hyperblinds",
 	"id": "hypb",
 	"author": ["cassknows"],
-	"description": "when the blinds are hyper",
+	"description": "23 stronger variants of vanilla blinds that appear in Endless Mode",
 	"prefix": "hypb",
 	"main_file": "hyperblinds.lua",
 	"priority": 28,
-	"badge_colour": "00BB22",
-	"version": "1.0.0",
+	"badge_colour": "69e252",
+	"version": "1.1.0",
 	"dependencies": [
         "Steamodded (>=1.0.0~BETA-1224b)"
     ]
