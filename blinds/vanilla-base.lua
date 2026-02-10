@@ -1,72 +1,3 @@
--- WALL : SUMMIT
-SMODS.Blind {
-    key = "summit",
-    order = 4,
-    dollars = 5,
-    mult = 18,
-    atlas = "blinds",
-    pos = { x = 0, y = 0 },
-    boss = { min = 9 },
-    boss_colour = HEX("6a3985"),
-    disable = function(self)
-        G.GAME.blind.chips = G.GAME.blind.chips / 2
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
-    end
-}
-
--- SERPENT : CONSTRICTOR
-SMODS.Blind {
-    key = "constrictor",
-    order = 17,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 1 },
-    boss = { min = 9 },
-    boss_colour = HEX("73aa7f"),
-    modifies_draw = true,
-    calculate = function(self, blind, context)
-        if not blind.disabled then
-            if context.drawing_cards and (G.GAME.current_round.hands_played ~= 0 or G.GAME.current_round.discards_used ~= 0) then
-                return {
-                    cards_to_draw = 1
-                }
-            end
-        end
-    end
-}
-
--- WHEEL : BLIND
-SMODS.Blind {
-    key = "blind",
-    order = 5,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 2 },
-    boss = { min = 9 },
-    boss_colour = HEX("5e0808"),
-    calculate = function(self, blind, context)
-        if not blind.disabled then
-            if context.stay_flipped and context.to_area == G.hand then
-                return {
-                    stay_flipped = true
-                }
-            end
-        end
-    end,
-    disable = function(self)
-        for i = 1, #G.hand.cards do
-            if G.hand.cards[i].facing == 'back' then
-                G.hand.cards[i]:flip()
-            end
-        end
-        for _, playing_card in pairs(G.playing_cards) do
-            playing_card.ability.wheel_flipped = nil
-        end
-    end
-}
-
 -- HOOK : CLAW
 SMODS.Blind {
     key = "claw",
@@ -127,7 +58,6 @@ SMODS.Blind {
     end
 }
 
-
 -- OX : URSA
 SMODS.Blind {
     key = "ursa",
@@ -160,200 +90,30 @@ SMODS.Blind {
     end
 }
 
-
--- NEEDLE : THREAD
+-- HOUSE : POLIS
 SMODS.Blind {
-    key = "thread",
-    order = 19,
-    dollars = 5,
-    mult = 0.5,
-    atlas = "blinds",
-    pos = { x = 0, y = 5 },
-    boss = { min = 9 },
-    boss_colour = HEX("61289b"),
-    defeat = function(self)
-        if not G.GAME.blind.disabled then
-            G.GAME.round_resets.hands = G.GAME.round_resets.hands - G.GAME.current_round.hands_left
-        end
-    end
-}
-
--- CLUB : MACE
-SMODS.Blind {
-    key = "mace",
-    order = 7,
+    key = "polis",
+    order = 3,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 6 },
+    pos = { x = 0, y = 17 },
     boss = { min = 9 },
-    boss_colour = HEX("16c099"),
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                for i, v in pairs(context.hand_drawn) do
-                    if v:is_suit("Clubs") then
-                        v:set_ability(G.P_CENTERS.c_base)
-                        v.seal = nil
-                        v:set_edition()
-                    end
-                end
-            end
-        end
-    end,
-}
-
--- HEAD : CLOT
-SMODS.Blind {
-    key = "clot",
-    order = 20,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 7 },
-    boss = { min = 9 },
-    boss_colour = HEX("e02bd3"),
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                for i, v in pairs(context.hand_drawn) do
-                    if v:is_suit("Hearts") then
-                        v:set_ability(G.P_CENTERS.c_base)
-                        v.seal = nil
-                        v:set_edition()
-                    end
-                end
-            end
-        end
-    end,
-}
-
--- GOAD : RAZOR
-SMODS.Blind {
-    key = "razor",
-    order = 10,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 8 },
-    boss = { min = 9 },
-    boss_colour = HEX("69677a"),
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                for i, v in pairs(context.hand_drawn) do
-                    if v:is_suit("Spades") then
-                        v:set_ability(G.P_CENTERS.c_base)
-                        v.seal = nil
-                        v:set_edition()
-                    end
-                end
-            end
-        end
-    end,
-}
-
--- WINDOW : GLINT
-SMODS.Blind {
-    key = "glint",
-    order = 12,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 9 },
-    boss = { min = 9 },
-    boss_colour = HEX("ebb700"),
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                for i, v in pairs(context.hand_drawn) do
-                    if v:is_suit("Diamonds") then
-                        v:set_ability(G.P_CENTERS.c_base)
-                        v.seal = nil
-                        v:set_edition()
-                    end
-                end
-            end
-        end
-    end,
-}
-
-
--- PLANT : EVERGREEN
-SMODS.Blind {
-    key = "evergreen",
-    order = 16,
-    dollars = 5,
-    mult = 2,
-    debuff = { is_face = true },
-    atlas = "blinds",
-    pos = { x = 0, y = 10 },
-    boss = { min = 9 },
-    boss_colour = HEX("135a3b"),
-    loc_vars = function(self)
-        return { vars = { '1', '2' } }
-    end,
-    collection_loc_vars = function(self)
-        return { vars = { '1', '2' } }
-    end,
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                local faces = {"Jack", "Queen", "King"}
-                for i, v in pairs(context.hand_drawn) do
-                    if SMODS.pseudorandom_probability(card, 'evergreen', 1, 2) then
-                        SMODS.change_base(v, nil, pseudorandom_element(faces, pseudoseed("evergreen")), nil)
-                    end
-                end
-            end
-        end
-    end,
-    recalc_debuff = function(self, card, from_blind)
-    if card:is_face(true) then
-        return true
-    end
-    return false
-end,
-}
-
--- MARK : SIGIL
-SMODS.Blind {
-    key = "sigil",
-    order = 23,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 11 },
-    boss = { min = 9 },
-    boss_colour = HEX("e4155e"),
-    loc_vars = function(self)
-        local numerator, denominator = SMODS.get_probability_vars(self, 1, 2, 'sigil')
-        return { vars = { numerator, denominator } }
-    end,
-    collection_loc_vars = function(self)
-        return { vars = { '1', '2' } }
-    end,
+    boss_colour = HEX("867860"),
     calculate = function(self, blind, context)
-        if not blind.disabled then
-            if context.hand_drawn then
-                local number_ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T"}
-                for i, v in pairs(context.hand_drawn) do
-                    if SMODS.pseudorandom_probability(card, 'sigil', 1, 2) and v:is_face() then
-                        v:flip()
-                        SMODS.change_base(v, nil, pseudorandom_element(number_ranks, pseudoseed("sigil")), nil)
-                    end
-                end
+        if not blind.disabled and context.hand_drawn and G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
+            for i, v in pairs(context.hand_drawn) do
+                G.hand.cards[i].ability.sometimes_face_down = true
             end
+        end
+        if not blind.disabled then
             if context.stay_flipped and context.to_area == G.hand and
-                not context.other_card:is_face() then
+                G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
                 return {
                     stay_flipped = true
                 }
             end
         end
-    end,
-    stay_flipped = function(self, area, card)
-        if not card:is_face() then return true end  
     end,
     disable = function(self)
         for i = 1, #G.hand.cards do
@@ -367,69 +127,49 @@ SMODS.Blind {
     end
 }
 
--- TOOTH : FANG
+-- WALL : SUMMIT
 SMODS.Blind {
-    key = "fang",
-    order = 21,
-	dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 12 },
-    boss = { min = 9 },
-	boss_colour = HEX("f7110e"),
-	calculate = function(self, card, context)
-		if context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
-			context.other_card.ability.perma_p_dollars = (context.other_card.ability.perma_p_dollars - 1) or -1
-		end
-	end
-}
-
--- PILLAR : MARBLE
-SMODS.Blind {
-    key = "marble",
-    order = 18,
+    key = "summit",
+    order = 4,
     dollars = 5,
-    mult = 2,
+    mult = 18,
     atlas = "blinds",
-    pos = { x = 0, y = 13 },
+    pos = { x = 0, y = 0 },
     boss = { min = 9 },
-    boss_colour = HEX("cbbcba"),
-    calculate = function(self, card, context)
-        if not G.GAME.blind.disabled then
-            if context.hand_drawn then
-                for i, v in pairs(context.hand_drawn) do
-                    if v.ability.marble_played_ever then
-                        v:set_debuff(true)
-                    end
-                end
-            end
-        end
-    end,
-    recalc_debuff = function(self, card)
-        if card.ability.marble_played_ever then
-            return true
-        end
+    boss_colour = HEX("6a3985"),
+    disable = function(self)
+        G.GAME.blind.chips = G.GAME.blind.chips / 2
+        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
     end
 }
 
--- FLINT : QUARTZ
+-- WHEEL : BLIND
 SMODS.Blind {
-    key = "quartz",
-    order = 22,
+    key = "blind",
+    order = 5,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 14 },
+    pos = { x = 0, y = 2 },
     boss = { min = 9 },
-    boss_colour = HEX("8d527c"),
+    boss_colour = HEX("5e0808"),
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if context.modify_hand then
-                blind.triggered = true
-                mult = mod_mult(0)
-                hand_chips = mod_chips(0)
-                update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
+            if context.stay_flipped and context.to_area == G.hand then
+                return {
+                    stay_flipped = true
+                }
             end
+        end
+    end,
+    disable = function(self)
+        for i = 1, #G.hand.cards do
+            if G.hand.cards[i].facing == 'back' then
+                G.hand.cards[i]:flip()
+            end
+        end
+        for _, playing_card in pairs(G.playing_cards) do
+            playing_card.ability.wheel_flipped = nil
         end
     end
 }
@@ -514,78 +254,29 @@ SMODS.Blind {
     end
 }
 
--- WATER : ALKAHEST
+-- CLUB : MACE
 SMODS.Blind {
-    key = "alkahest",
-    order = 11,
+    key = "mace",
+    order = 7,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 16 },
+    pos = { x = 0, y = 6 },
     boss = { min = 9 },
-    boss_colour = HEX("0bebdf"),
-    calculate = function(self, blind, context)
-        local activated = false
-        if not blind.disabled then
-            if context.setting_blind then
-                ease_discard(1)
-                G.hand:change_size(-2)
-            end
-            if context.pre_discard and not activated then
-                SMODS.change_discard_limit(-1)
-                activated = true
-            end
-        end
-    end,
-    disable = function(self)
-        ease_discard(-1)
-        G.hand:change_size(2)
-        if activated then
-            SMODS.change_discard_limit(1)
-        end
-    end,
-    defeat = function(self)
+    boss_colour = HEX("16c099"),
+    calculate = function(self, card, context)
         if not G.GAME.blind.disabled then
-            G.hand:change_size(2)
-        end
-    end
-}
-
--- HOUSE : POLIS
-SMODS.Blind {
-    key = "polis",
-    order = 3,
-    dollars = 5,
-    mult = 2,
-    atlas = "blinds",
-    pos = { x = 0, y = 17 },
-    boss = { min = 9 },
-    boss_colour = HEX("867860"),
-    calculate = function(self, blind, context)
-        if not blind.disabled and context.hand_drawn and G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
-            for i, v in pairs(context.hand_drawn) do
-                G.hand.cards[i].ability.sometimes_face_down = true
-            end
-        end
-        if not blind.disabled then
-            if context.stay_flipped and context.to_area == G.hand and
-                G.GAME.current_round.hands_played == 0 and G.GAME.current_round.discards_used == 0 then
-                return {
-                    stay_flipped = true
-                }
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Clubs") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
             end
         end
     end,
-    disable = function(self)
-        for i = 1, #G.hand.cards do
-            if G.hand.cards[i].facing == 'back' then
-                G.hand.cards[i]:flip()
-            end
-        end
-        for _, playing_card in pairs(G.playing_cards) do
-            playing_card.ability.wheel_flipped = nil
-        end
-    end
 }
 
 -- FISH : ESCA
@@ -630,6 +321,120 @@ SMODS.Blind {
     end
 }
 
+-- PSYCHIC : SEER
+SMODS.Blind {
+    key = "seer",
+    order = 9,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 20 },
+    boss = { min = 9 },
+    boss_colour = HEX("ffa400"),
+    loc_vars = function()
+        return { vars = { G.GAME.current_round.discards_left + G.GAME.current_round.hands_left}}
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '[hands] + [discards]' } }
+    end,
+    debuff_hand = function(self, cards, hand, handname, check)
+        G.GAME.blind:set_text()
+        local offset = 0
+        if G.STATE == G.STATES.HAND_PLAYED then
+            offset = 1
+        end
+        if #cards ~= (G.GAME.current_round.discards_left + G.GAME.current_round.hands_left + offset) then return true end
+        return false
+    end
+}
+
+-- GOAD : RAZOR
+SMODS.Blind {
+    key = "razor",
+    order = 10,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 8 },
+    boss = { min = 9 },
+    boss_colour = HEX("69677a"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Spades") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
+-- WATER : ALKAHEST
+SMODS.Blind {
+    key = "alkahest",
+    order = 11,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 16 },
+    boss = { min = 9 },
+    boss_colour = HEX("0bebdf"),
+    calculate = function(self, blind, context)
+        local activated = false
+        if not blind.disabled then
+            if context.setting_blind then
+                ease_discard(1)
+                G.hand:change_size(-2)
+            end
+            if context.pre_discard and not activated then
+                SMODS.change_discard_limit(-1)
+                activated = true
+            end
+        end
+    end,
+    disable = function(self)
+        ease_discard(-1)
+        G.hand:change_size(2)
+        if activated then
+            SMODS.change_discard_limit(1)
+        end
+    end,
+    defeat = function(self)
+        if not G.GAME.blind.disabled then
+            G.hand:change_size(2)
+        end
+    end
+}
+
+-- WINDOW : GLINT
+SMODS.Blind {
+    key = "glint",
+    order = 12,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 9 },
+    boss = { min = 9 },
+    boss_colour = HEX("ebb700"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Diamonds") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
 -- MANACLE : TAR
 SMODS.Blind {
     key = "tar",
@@ -660,31 +465,37 @@ SMODS.Blind {
     end
 }
 
-
--- PSYCHIC : SEER
+-- EYE : IRIS
 SMODS.Blind {
-    key = "seer",
-    order = 9,
+    key = "iris",
+    order = 14,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 20 },
+    pos = { x = 0, y = 22 },
     boss = { min = 9 },
-    boss_colour = HEX("ffa400"),
-    loc_vars = function()
-        return { vars = { G.GAME.current_round.discards_left + G.GAME.current_round.hands_left}}
-    end,
-    collection_loc_vars = function(self)
-        return { vars = { '[hands] + [discards]' } }
-    end,
-    debuff_hand = function(self, cards, hand, handname, check)
-        G.GAME.blind:set_text()
-        local offset = 0
-        if G.STATE == G.STATES.HAND_PLAYED then
-            offset = 1
+    boss_colour = HEX("4b71e4"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.setting_blind then
+                blind.hands = {}
+                for _, poker_hand in ipairs(G.handlist) do
+                    blind.hands[poker_hand] = false
+                end
+            end
+            if context.debuff_hand then
+                if blind.hands[context.scoring_name] then
+                    blind.triggered = true
+                    return {
+                        debuff = true
+                    }
+                end
+                if not context.check then
+                    blind.hands[context.scoring_name] = true
+                    iris_hands[context.scoring_name] = true
+                end
+            end
         end
-        if #cards ~= (G.GAME.current_round.discards_left + G.GAME.current_round.hands_left + offset) then return true end
-        return false
     end
 }
 
@@ -723,37 +534,230 @@ SMODS.Blind {
     end
 }
 
-
--- EYE : IRIS
+-- PLANT : EVERGREEN
 SMODS.Blind {
-    key = "iris",
-    order = 14,
+    key = "evergreen",
+    order = 16,
+    dollars = 5,
+    mult = 2,
+    debuff = { is_face = true },
+    atlas = "blinds",
+    pos = { x = 0, y = 10 },
+    boss = { min = 9 },
+    boss_colour = HEX("135a3b"),
+    loc_vars = function(self)
+        return { vars = { '1', '2' } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '1', '2' } }
+    end,
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                local faces = {"Jack", "Queen", "King"}
+                for i, v in pairs(context.hand_drawn) do
+                    if SMODS.pseudorandom_probability(card, 'evergreen', 1, 2) then
+                        SMODS.change_base(v, nil, pseudorandom_element(faces, pseudoseed("evergreen")), nil)
+                    end
+                end
+            end
+        end
+    end,
+    recalc_debuff = function(self, card, from_blind)
+    if card:is_face(true) then
+        return true
+    end
+    return false
+end,
+}
+
+-- SERPENT : CONSTRICTOR
+SMODS.Blind {
+    key = "constrictor",
+    order = 17,
     dollars = 5,
     mult = 2,
     atlas = "blinds",
-    pos = { x = 0, y = 22 },
+    pos = { x = 0, y = 1 },
     boss = { min = 9 },
-    boss_colour = HEX("4b71e4"),
+    boss_colour = HEX("73aa7f"),
+    modifies_draw = true,
     calculate = function(self, blind, context)
         if not blind.disabled then
-            if context.setting_blind then
-                blind.hands = {}
-                for _, poker_hand in ipairs(G.handlist) do
-                    blind.hands[poker_hand] = false
-                end
-            end
-            if context.debuff_hand then
-                if blind.hands[context.scoring_name] then
-                    blind.triggered = true
-                    return {
-                        debuff = true
-                    }
-                end
-                if not context.check then
-                    blind.hands[context.scoring_name] = true
-                    iris_hands[context.scoring_name] = true
-                end
+            if context.drawing_cards and (G.GAME.current_round.hands_played ~= 0 or G.GAME.current_round.discards_used ~= 0) then
+                return {
+                    cards_to_draw = 1
+                }
             end
         end
     end
 }
+
+-- PILLAR : MARBLE
+SMODS.Blind {
+    key = "marble",
+    order = 18,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 13 },
+    boss = { min = 9 },
+    boss_colour = HEX("cbbcba"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v.ability.marble_played_ever then
+                        v:set_debuff(true)
+                    end
+                end
+            end
+        end
+    end,
+    recalc_debuff = function(self, card)
+        if card.ability.marble_played_ever then
+            return true
+        end
+    end
+}
+
+-- NEEDLE : THREAD
+SMODS.Blind {
+    key = "thread",
+    order = 19,
+    dollars = 5,
+    mult = 0.5,
+    atlas = "blinds",
+    pos = { x = 0, y = 5 },
+    boss = { min = 9 },
+    boss_colour = HEX("61289b"),
+    defeat = function(self)
+        if not G.GAME.blind.disabled then
+            G.GAME.round_resets.hands = G.GAME.round_resets.hands - G.GAME.current_round.hands_left
+        end
+    end
+}
+
+-- HEAD : CLOT
+SMODS.Blind {
+    key = "clot",
+    order = 20,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 7 },
+    boss = { min = 9 },
+    boss_colour = HEX("e02bd3"),
+    calculate = function(self, card, context)
+        if not G.GAME.blind.disabled then
+            if context.hand_drawn then
+                for i, v in pairs(context.hand_drawn) do
+                    if v:is_suit("Hearts") then
+                        v:set_ability(G.P_CENTERS.c_base)
+                        v.seal = nil
+                        v:set_edition()
+                    end
+                end
+            end
+        end
+    end,
+}
+
+-- TOOTH : FANG
+SMODS.Blind {
+    key = "fang",
+    order = 21,
+	dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 12 },
+    boss = { min = 9 },
+	boss_colour = HEX("f7110e"),
+	calculate = function(self, card, context)
+		if context.individual and context.cardarea == G.play and not G.GAME.blind.disabled then
+			context.other_card.ability.perma_p_dollars = (context.other_card.ability.perma_p_dollars - 1) or -1
+		end
+	end
+}
+
+-- FLINT : QUARTZ
+SMODS.Blind {
+    key = "quartz",
+    order = 22,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 14 },
+    boss = { min = 9 },
+    boss_colour = HEX("8d527c"),
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.modify_hand then
+                blind.triggered = true
+                mult = mod_mult(0)
+                hand_chips = mod_chips(0)
+                update_hand_text({ sound = 'chips2', modded = true }, { chips = hand_chips, mult = mult })
+            end
+        end
+    end
+}
+
+-- MARK : SIGIL
+SMODS.Blind {
+    key = "sigil",
+    order = 23,
+    dollars = 5,
+    mult = 2,
+    atlas = "blinds",
+    pos = { x = 0, y = 11 },
+    boss = { min = 9 },
+    boss_colour = HEX("e4155e"),
+    loc_vars = function(self)
+        local numerator, denominator = SMODS.get_probability_vars(self, 1, 2, 'sigil')
+        return { vars = { numerator, denominator } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '1', '2' } }
+    end,
+    calculate = function(self, blind, context)
+        if not blind.disabled then
+            if context.hand_drawn then
+                local number_ranks = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "T"}
+                for i, v in pairs(context.hand_drawn) do
+                    if SMODS.pseudorandom_probability(card, 'sigil', 1, 2) and v:is_face() then
+                        v:flip()
+                        SMODS.change_base(v, nil, pseudorandom_element(number_ranks, pseudoseed("sigil")), nil)
+                    end
+                end
+            end
+            if context.stay_flipped and context.to_area == G.hand and
+                not context.other_card:is_face() then
+                return {
+                    stay_flipped = true
+                }
+            end
+        end
+    end,
+    stay_flipped = function(self, area, card)
+        if not card:is_face() then return true end  
+    end,
+    disable = function(self)
+        for i = 1, #G.hand.cards do
+            if G.hand.cards[i].facing == 'back' then
+                G.hand.cards[i]:flip()
+            end
+        end
+        for _, playing_card in pairs(G.playing_cards) do
+            playing_card.ability.wheel_flipped = nil
+        end
+    end
+}
+
+
+
+
+
+
+
+
+
