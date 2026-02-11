@@ -171,6 +171,12 @@ return {
             "might not score this run"
         },
       },
+      bl_hypb_final_epoch = {
+        name = "HSB#1# EPOCH",
+        text = {
+            "big #1#"
+        },
+      },
     },
   },
 }

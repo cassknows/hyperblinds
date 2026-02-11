@@ -8,6 +8,16 @@ SMODS.Atlas {
 }
 
 SMODS.Atlas {
+  key = "showdowns",
+  px = 34,
+  py = 34,
+  path = "vanilla-showdown-atlas.png",
+  frames = 1,
+  atlas_table = "ANIMATION_ATLAS"
+}
+
+
+SMODS.Atlas {
     key = "modicon",
     path = "hypb_ico.png",
     px = 34,
@@ -27,11 +37,18 @@ local se_carry = 0.918772
 SMODS.current_mod.reset_game_globals = function(run_start)
   if run_start then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
-    flytrap_hands = {}
-    iris_hands = {}
+    hypb_flytrap_hands = {}
+    hypb_iris_hands = {}
   end
 end
 
+local update_ref = Game.update
+Game.update = function(self, dt)
+  local ret = update_ref(self, dt)
+  hypb_global_time_var = os.time()
+  --G.GAME.blind:set_text()
+  return ret
+end
 
 SMODS.current_mod.calculate = function(self, context)
   if context.ante_change then
@@ -59,7 +76,7 @@ SMODS.current_mod.calculate = function(self, context)
     se_carry = prand(context.scoring_name .. tostring(context.scoring_name.played) .. tostring(se_carry) .. tostring(G.GAME.round_resets.ante))
   end
   if context.debuff_hand then
-    if context.scoring_name and iris_hands[context.scoring_name] ~= nil then
+    if context.scoring_name and hypb_iris_hands[context.scoring_name] ~= nil then
       if se_carry < 0.1666 then
         return {
           debuff = true,

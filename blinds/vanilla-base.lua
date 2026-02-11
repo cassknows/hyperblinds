@@ -492,7 +492,7 @@ SMODS.Blind {
                 end
                 if not context.check then
                     blind.hands[context.scoring_name] = true
-                    iris_hands[context.scoring_name] = true
+                    hypb_iris_hands[context.scoring_name] = true
                 end
             end
         end
@@ -527,7 +527,7 @@ SMODS.Blind {
                 end
                 if not context.check then
                     blind.only_hand = context.scoring_name
-                    flytrap_hands[context.scoring_name] = true
+                    hypb_flytrap_hands[context.scoring_name] = true
                 end
             end
         end
