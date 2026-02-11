@@ -69,7 +69,7 @@ SMODS.current_mod.calculate = function(self, context)
       stay_flipped = true
     }
   end
-  if context.before and flytrap_hands[context.scoring_name] then
+  if context.before and hypb_flytrap_hands[context.scoring_name] then
       G.GAME.current_round.hands_left = G.GAME.current_round.hands_left - 1
   end
   if context.after then
