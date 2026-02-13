@@ -1,7 +1,7 @@
 SMODS.Atlas {
   key = "blinds",
-  px = 34,
-  py = 34,
+  px = 42,
+  py = 42,
   path = "vanilla-base-atlas.png",
   frames = 1,
   atlas_table = "ANIMATION_ATLAS"
@@ -15,7 +15,6 @@ SMODS.Atlas {
   frames = 1,
   atlas_table = "ANIMATION_ATLAS"
 }
-
 
 SMODS.Atlas {
     key = "modicon",
@@ -39,6 +38,23 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.hypb_ante_dollars = G.GAME.dollars
     hypb_flytrap_hands = {}
     hypb_iris_hands = {}
+    hypb_ethos_ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
+    hypb_ethos_perma = {}
+    hypb_ethos_debuff_rank = ''
+  end
+end
+
+
+hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
+hypb_evens = 1
+
+
+SMODS.current_mod.set_debuff = function(card)
+  if hypb_ethos_perma[card:get_id()] ~= nil then
+    return true
+  end
+  if (card.ability.ethos_perma_debuff == true) then
+    return true
   end
 end
 
@@ -51,6 +67,9 @@ Game.update = function(self, dt)
 end
 
 SMODS.current_mod.calculate = function(self, context)
+  if context.check then
+    hypb_evens = math.fmod(hypb_evens + 1, 2)
+  end
   if context.ante_change then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
   end
@@ -61,6 +80,10 @@ SMODS.current_mod.calculate = function(self, context)
     for i, v in pairs(context.hand_drawn) do
       if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back"then
         v:flip()
+      end
+      if hypb_ethos_perma[v:get_id()] ~= nil then
+        v:set_debuff(true)
+        v:juice_up()
       end
     end
   end

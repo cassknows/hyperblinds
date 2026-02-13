@@ -177,6 +177,14 @@ return {
             "big #1#"
         },
       },
+      bl_hypb_final_ethos = {
+        name = "HSB1050 ETHOS",
+        text = {
+            "Every #1# debuff a random",
+            "#2#, #3# a hand",
+            "makes that debuff permanent"
+        },
+      },
     },
   },
 }

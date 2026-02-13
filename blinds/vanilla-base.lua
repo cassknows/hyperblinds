@@ -563,12 +563,12 @@ SMODS.Blind {
             end
         end
     end,
-    recalc_debuff = function(self, card, from_blind)
-    if card:is_face(true) then
-        return true
-    end
-    return false
-end,
+    recalc_debuff = function(self, card)
+        if card:is_face(true) then
+            return true
+        end
+        return false
+    end,
 }
 
 -- SERPENT : CONSTRICTOR
