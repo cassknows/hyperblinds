@@ -36,21 +36,22 @@ local se_carry = 0.918772
 SMODS.current_mod.reset_game_globals = function(run_start)
   if run_start then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
-    hypb_flytrap_hands = {}
-    hypb_iris_hands = {}
-    hypb_ethos_ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
-    hypb_ethos_perma = {}
-    hypb_ethos_debuff_rank = ''
+    G.GAME.hypb_flytrap_hands = {}
+    G.GAME.hypb_iris_hands = {}
+    G.GAME.hypb_ethos_ranks = {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14}
+    G.GAME.hypb_ethos_perma = {}
+    G.GAME.hypb_ethos_debuff_rank = ''
+    G.GAME.hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
+    G.GAME.hypb_evens = 1
   end
 end
 
 
-hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
-hypb_evens = 1
+
 
 
 SMODS.current_mod.set_debuff = function(card)
-  if hypb_ethos_perma[card:get_id()] ~= nil then
+  if G.GAME.hypb_ethos_perma[card:get_id()] ~= nil then
     return true
   end
   if (card.ability.ethos_perma_debuff == true) then
@@ -61,14 +62,14 @@ end
 local update_ref = Game.update
 Game.update = function(self, dt)
   local ret = update_ref(self, dt)
-  hypb_global_time_var = os.time()
+  G.GAME.hypb_global_time_var = os.time()
   --G.GAME.blind:set_text()
   return ret
 end
 
 SMODS.current_mod.calculate = function(self, context)
   if context.check then
-    hypb_evens = math.fmod(hypb_evens + 1, 2)
+    G.GAME.hypb_evens = math.fmod(G.GAME.hypb_evens + 1, 2)
   end
   if context.ante_change then
     G.GAME.hypb_ante_dollars = G.GAME.dollars
@@ -81,7 +82,7 @@ SMODS.current_mod.calculate = function(self, context)
       if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back"then
         v:flip()
       end
-      if hypb_ethos_perma[v:get_id()] ~= nil then
+      if G.GAME.hypb_ethos_perma[v:get_id()] ~= nil then
         v:set_debuff(true)
         v:juice_up()
       end
@@ -92,14 +93,14 @@ SMODS.current_mod.calculate = function(self, context)
       stay_flipped = true
     }
   end
-  if context.before and hypb_flytrap_hands[context.scoring_name] then
+  if context.before and G.GAME.hypb_flytrap_hands[context.scoring_name] then
       G.GAME.current_round.hands_left = G.GAME.current_round.hands_left - 1
   end
   if context.after then
     se_carry = prand(context.scoring_name .. tostring(context.scoring_name.played) .. tostring(se_carry) .. tostring(G.GAME.round_resets.ante))
   end
   if context.debuff_hand then
-    if context.scoring_name and hypb_iris_hands[context.scoring_name] ~= nil then
+    if context.scoring_name and G.GAME.hypb_iris_hands[context.scoring_name] ~= nil then
       if se_carry < 0.1666 then
         return {
           debuff = true,
