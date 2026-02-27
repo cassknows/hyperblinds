@@ -185,6 +185,14 @@ return {
             "makes that debuff permanent"
         },
       },
+      bl_hypb_final_reign = {
+        name = "HSB7280 REIGN",
+        text = {
+            "All cards debuffed until",
+            "#1# Joker(s) sold, +1 when",
+            "Playing or Discarding a hand"
+        },
+      },
     },
   },
 }

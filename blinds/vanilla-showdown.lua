@@ -20,7 +20,6 @@ SMODS.Blind {
     end
 }
 
---G.GAME.blind:set_text()
 
 
 -- CRIMSON HEART : ETHOS
@@ -41,6 +40,8 @@ SMODS.Blind {
     end,
     calculate = function (self, card, context)
         if context.check then
+            G.GAME.blind.loc_debuff_lines = {}
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
             G.GAME.blind:set_text()
         end
         if context.setting_blind then
@@ -133,5 +134,50 @@ SMODS.Blind {
                 end
             end
         end
+    end
+}
+
+-- VERDANT LEAF : REIGN
+SMODS.Blind {
+    key = "final_reign",
+    dollars = 8,
+    mult = 6,
+    atlas = "showdowns",
+    pos = { x = 0, y = 3 },
+    boss = { showdown = true },
+    boss_colour = HEX("325763"),
+    loc_vars = function(self)
+        return { vars = { G.GAME.hypb_reign_sell } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { '1' } }
+    end,
+    calculate = function(self, blind, context)
+        if context.setting_blind then
+            G.GAME.hypb_reign_sell = 1
+        end
+        if context.selling_card and context.card.ability.set == 'Joker'then
+            G.GAME.hypb_reign_sell = math.max(0, G.GAME.hypb_reign_sell - 1)
+            G.GAME.blind.loc_debuff_lines = {}
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+            G.GAME.blind:set_text()
+        end
+        if context.pre_discard or context.press_play then
+            G.GAME.hypb_reign_sell = G.GAME.hypb_reign_sell + 1
+            G.GAME.blind.loc_debuff_lines = {}
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+            G.GAME.blind:set_text()
+        end
+        if (context.after or context.pre_discard or context.hand_drawn) and G.GAME.hypb_reign_sell > 0.1 then
+            for _, card in ipairs(G.hand.cards) do
+                card:set_debuff(true)
+            end
+        end
+    end,
+    recalc_debuff = function(self, card)
+        if G.GAME.hypb_reign_sell > 0.1 and card.area ~= G.jokers then
+            return true
+        end
+        return false
     end
 }

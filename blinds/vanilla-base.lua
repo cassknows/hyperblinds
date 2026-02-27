@@ -338,6 +338,8 @@ SMODS.Blind {
         return { vars = { '[hands] + [discards]' } }
     end,
     debuff_hand = function(self, cards, hand, handname, check)
+        G.GAME.blind.loc_debuff_lines = {}
+        G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         G.GAME.blind:set_text()
         local offset = 0
         if G.STATE == G.STATES.HAND_PLAYED then

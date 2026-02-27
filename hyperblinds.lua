@@ -43,6 +43,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.hypb_ethos_debuff_rank = ''
     G.GAME.hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
     G.GAME.hypb_evens = 1
+    G.GAME.hypb_reign_sell = 1
   end
 end
 
