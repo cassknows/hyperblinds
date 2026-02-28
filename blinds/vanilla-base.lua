@@ -341,6 +341,7 @@ SMODS.Blind {
         G.GAME.blind.loc_debuff_lines = {}
         G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         G.GAME.blind:set_text()
+        G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         local offset = 0
         if G.STATE == G.STATES.HAND_PLAYED then
             offset = 1

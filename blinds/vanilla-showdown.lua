@@ -43,6 +43,7 @@ SMODS.Blind {
             G.GAME.blind.loc_debuff_lines = {}
             G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
             G.GAME.blind:set_text()
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         end
         if context.setting_blind then
             if G.jokers.cards[1] then
@@ -161,12 +162,14 @@ SMODS.Blind {
             G.GAME.blind.loc_debuff_lines = {}
             G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
             G.GAME.blind:set_text()
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         end
         if context.pre_discard or context.press_play then
             G.GAME.hypb_reign_sell = G.GAME.hypb_reign_sell + 1
             G.GAME.blind.loc_debuff_lines = {}
             G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
             G.GAME.blind:set_text()
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
         end
         if (context.after or context.pre_discard or context.hand_drawn) and G.GAME.hypb_reign_sell > 0.1 then
             for _, card in ipairs(G.hand.cards) do
