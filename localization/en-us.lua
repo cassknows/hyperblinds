@@ -200,6 +200,13 @@ return {
             "Whenever you select a card"
         },
       },
+      bl_hypb_final_ichor = {
+        name = "HSB4231 ICHOR",
+        text = {
+            "Can only select #1#",
+            "Changes when cards drawn"
+        } -- TODO: dynamic blind name like 1423, 3412, 2341, 1432, etc
+      },
     },
   },
 }

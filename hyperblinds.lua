@@ -44,11 +44,41 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
     G.GAME.hypb_evens = 1
     G.GAME.hypb_reign_sell = 1
+    G.GAME.hypb_ichor_suit = "Hearts"
   end
 end
 
+function hypb_ichor_suit_picker()
+  local tempcard = G.hand.cards[pseudorandom("ichor_suit", 1, #G.hand.cards)]
+  local ticker = 20
+  while SMODS.has_no_suit(tempcard) and tempcard.base.suit ~= "entr_nilsuit" and ticker > 0 do
+    tempcard = G.hand.cards[pseudorandom("ichor_suit", 1, #G.hand.cards)]
+    ticker = ticker - 1
+  end
+  G.GAME.hypb_ichor_suit = tempcard.base.suit
+end
 
-
+local ca_ath = CardArea.add_to_highlighted
+function CardArea:add_to_highlighted(card, silent)
+  if card and not (G.GAME.blind.config.blind.key == "bl_hypb_final_ichor" and 
+  not ((card:is_suit(G.GAME.hypb_ichor_suit)) or
+  (G.GAME.hypb_ichor_suit == "entr_nilsuit" and card.base.suit == "entr_nilsuit")
+  or ( SMODS.has_no_suit(card) and card.base.suit ~= "entr_nilsuit"))) then
+      ca_ath(self, card, silent)
+  else if G.GAME.blind.config.blind.key == "bl_hypb_final_ichor" then
+      for _, v in pairs(G.hand.cards) do
+        if v:is_suit(G.GAME.hypb_ichor_suit) or (G.GAME.hypb_ichor_suit == "entr_nilsuit" and card.base.suit == "entr_nilsuit")then
+          return
+        end
+      end
+      hypb_ichor_suit_picker()
+      G.GAME.blind.loc_debuff_lines = {}
+      G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+      G.GAME.blind:set_text()
+      G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+    end
+  end
+end
 
 
 SMODS.current_mod.set_debuff = function(card)
@@ -80,7 +110,7 @@ SMODS.current_mod.calculate = function(self, context)
   end
   if context.hand_drawn then
     for i, v in pairs(context.hand_drawn) do
-      if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back"then
+      if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back" then
         v:flip()
       end
       if G.GAME.hypb_ethos_perma[v:get_id()] ~= nil then

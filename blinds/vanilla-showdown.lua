@@ -247,3 +247,31 @@ SMODS.Blind {
 }
 
 
+-- CERULEAN BELL : ICHOR
+SMODS.Blind {
+    key = "final_ichor",
+    dollars = 8,
+    mult = 6,
+    atlas = "showdowns",
+    pos = { x = 0, y = 1 },
+    boss = {
+		min = 15,
+		showdown = true
+	},
+    boss_colour = HEX("009cfd"),
+    loc_vars = function(self)
+        return { vars = { localize(G.GAME.hypb_ichor_suit, "suits_plural") } }
+    end,
+    collection_loc_vars = function(self)
+        return { vars = { 'suit' } }
+    end,
+    calculate = function(self, blind, context)
+        if context.hand_drawn then
+            hypb_ichor_suit_picker()
+            G.GAME.blind.loc_debuff_lines = {}
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+            G.GAME.blind:set_text()
+            G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+        end
+    end
+}
