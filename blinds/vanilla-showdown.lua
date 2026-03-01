@@ -5,8 +5,10 @@ SMODS.Blind {
     mult = 6,
     atlas = "showdowns",
     pos = { x = 0, y = 4 },
-    --boss = { showdown = true },
-    boss = { min = 999 },
+    boss = {
+		min = 15,
+		showdown = true
+	},
     boss_colour = HEX("8a71e1"),
     loc_vars = function(self)
         return { vars = { string.sub(tostring(G.GAME.hypb_global_time_var), -4) } } -- yes i know its not the actual MMSS, i'll adjust the exact parsing later
@@ -29,8 +31,10 @@ SMODS.Blind {
     mult = 6,
     atlas = "showdowns",
     pos = { x = 0, y = 0 },
-    --boss = { showdown = true },
-    boss = { min = 999 },
+    boss = {
+		min = 15,
+		showdown = true
+	},
     boss_colour = HEX("ac3232"),
     loc_vars = function(self)
         return { vars = G.GAME.hypb_ethos_locs[G.GAME.hypb_evens + 1] } 
@@ -145,7 +149,10 @@ SMODS.Blind {
     mult = 6,
     atlas = "showdowns",
     pos = { x = 0, y = 3 },
-    boss = { showdown = true },
+    boss = {
+		min = 15,
+		showdown = true
+	},
     boss_colour = HEX("325763"),
     loc_vars = function(self)
         return { vars = { G.GAME.hypb_reign_sell } }
@@ -184,3 +191,59 @@ SMODS.Blind {
         return false
     end
 }
+
+-- AMBER ACORN : LETHE
+SMODS.Blind {
+    key = "final_lethe",
+    dollars = 8,
+    mult = 6,
+    atlas = "showdowns",
+    pos = { x = 0, y = 2 },
+    boss = {
+		min = 15,
+		showdown = true
+	},
+    boss_colour = HEX("e8a711"),
+    calculate = function(self, blind, context)
+		if context.check and not G.GAME.blind.disabled then
+			if #G.jokers.cards > 1 then
+				local joker_1 = pseudorandom("lethe_joker1", 1, #G.jokers.cards)
+				local joker_2 = pseudorandom("lethe_joker2", 1, #G.jokers.cards)
+				local tries = 20
+				while G.jokers.cards[joker_2] == G.jokers.cards[joker_1] and tries > 0 do
+					joker_2 = pseudorandom("lethe_joker2_reroll", 1, #G.jokers.cards)
+					tries = tries - 1
+				end
+				local temp = G.jokers.cards[joker_2]
+				G.jokers.cards[joker_2] = G.jokers.cards[joker_1]
+				G.jokers.cards[joker_1] = temp
+                G.jokers.cards[joker_1]:flip()
+                if G.jokers.cards[joker_2] ~= 'back' and math.random() > 0.5 then
+                    G.jokers.cards[joker_2]:flip()
+                end
+			end
+            if #G.hand.cards > 1 then
+				local hand_1 = pseudorandom("lethe_hand1", 1, #G.hand.cards)
+				local hand_2 = pseudorandom("lethe_hand2", 1, #G.hand.cards)
+				local tries = 20
+				while G.hand.cards[hand_2] == G.hand.cards[hand_1] and tries > 0 do
+					hand_2 = pseudorandom("lethe_hand2_reroll", 1, #G.hand.cards)
+					tries = tries - 1
+				end
+				local temp = G.hand.cards[hand_2]
+				G.hand.cards[hand_2] = G.hand.cards[hand_1]
+				G.hand.cards[hand_1] = temp
+                --if G.hand.cards[hand_1] ~= 'back' and G.hand.cards[hand_1].ability.sometimes_face_down ~= true then
+                    G.hand.cards[hand_1]:flip()
+                --end
+                --if G.hand.cards[hand_2] ~= 'back' and G.hand.cards[hand_2].ability.sometimes_face_down ~= true then
+                    G.hand.cards[hand_2]:flip()
+                --end
+                G.hand.cards[hand_1].ability.sometimes_face_down = true
+                G.hand.cards[hand_2].ability.sometimes_face_down = true
+			end
+		end
+	end
+}
+
+

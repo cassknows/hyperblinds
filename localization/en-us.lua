@@ -193,6 +193,13 @@ return {
             "Playing or Discarding a hand"
         },
       },
+      bl_hypb_final_lethe = {
+        name = "HSB3848 LETHE",
+        text = {
+            "Shuffles and flips cards",
+            "Whenever you select a card"
+        },
+      },
     },
   },
 }
