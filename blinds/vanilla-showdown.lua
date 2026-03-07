@@ -2,7 +2,7 @@
 SMODS.Blind {
     key = "final_epoch",
     dollars = 8,
-    mult = 6,
+    mult = 1,
     atlas = "showdowns",
     pos = { x = 0, y = 4 },
     boss = {
@@ -11,14 +11,13 @@ SMODS.Blind {
 	},
     boss_colour = HEX("8a71e1"),
     loc_vars = function(self)
-        return { vars = { string.sub(tostring(G.GAME.hypb_global_time_var), -4) } } -- yes i know its not the actual MMSS, i'll adjust the exact parsing later
+        return { vars = { string.sub(tostring(G.GAME.hypb_global_time_var), -4), G.GAME.hypb_epoch_scale } } -- yes i know its not the actual MMSS, i'll adjust the exact parsing later
     end,
     collection_loc_vars = function(self)
-        return { vars = { 'MMSS' } }
+        return { vars = { 'MMSS', "-5" } }
     end,
-    disable = function(self)
-        G.GAME.blind.chips = G.GAME.blind.chips / 3
-        G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+    calculate = function (self, card, context)
+        if context.setting_blind then G.GAME.hypb_epoch_scale = -5 end
     end
 }
 
@@ -28,7 +27,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_ethos",
     dollars = 8,
-    mult = 6,
+    mult = 4,
     atlas = "showdowns",
     pos = { x = 0, y = 0 },
     boss = {
@@ -146,7 +145,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_reign",
     dollars = 8,
-    mult = 6,
+    mult = 4,
     atlas = "showdowns",
     pos = { x = 0, y = 3 },
     boss = {
@@ -196,7 +195,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_lethe",
     dollars = 8,
-    mult = 6,
+    mult = 4,
     atlas = "showdowns",
     pos = { x = 0, y = 2 },
     boss = {
@@ -251,7 +250,7 @@ SMODS.Blind {
 SMODS.Blind {
     key = "final_ichor",
     dollars = 8,
-    mult = 6,
+    mult = 4,
     atlas = "showdowns",
     pos = { x = 0, y = 1 },
     boss = {

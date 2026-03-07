@@ -42,9 +42,10 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.hypb_ethos_perma = {}
     G.GAME.hypb_ethos_debuff_rank = ''
     G.GAME.hypb_ethos_locs = {{ 'Discard', 'Rank', 'Playing' }, { 'Hand', 'Joker', 'Discarding' }}
-    G.GAME.hypb_evens = 1
+    G.GAME.hypb_evens = 0
     G.GAME.hypb_reign_sell = 1
     G.GAME.hypb_ichor_suit = "Hearts"
+    G.GAME.hypb_epoch_scale = -5
   end
 end
 
@@ -90,13 +91,33 @@ SMODS.current_mod.set_debuff = function(card)
   end
 end
 
+local cdt = 0
 local update_ref = Game.update
 Game.update = function(self, dt)
   local ret = update_ref(self, dt)
   G.GAME.hypb_global_time_var = os.time()
-  --G.GAME.blind:set_text()
+  if G.GAME.blind and G.GAME.blind.config.blind.key == "bl_hypb_final_epoch" then
+      cdt = cdt + dt
+      if cdt >= 1 then
+        cdt = 0
+        
+        if G.STATE == G.STATES.HAND_PLAYED or G.SETTINGS.paused then else
+          G.GAME.blind.chips = G.GAME.blind.chips * (1 + G.GAME.hypb_epoch_scale/100)
+          G.GAME.hypb_epoch_scale = G.GAME.hypb_epoch_scale + 1
+          G.GAME.blind:juice_up()
+          G.GAME.blind.chip_text = number_format(G.GAME.blind.chips)
+          G.HUD_blind:recalculate()
+        end
+
+        G.GAME.blind.loc_debuff_lines = {}
+        G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+        G.GAME.blind:set_text()
+        G.FUNCS.HUD_blind_debuff(G.HUD_blind:get_UIE_by_ID('HUD_blind_debuff'))
+      end
+  end
   return ret
 end
+
 
 SMODS.current_mod.calculate = function(self, context)
   if context.check then
@@ -109,7 +130,7 @@ SMODS.current_mod.calculate = function(self, context)
     context.other_card.ability.marble_played_ever = true
   end
   if context.hand_drawn then
-    for i, v in pairs(context.hand_drawn) do
+    for _, v in pairs(context.hand_drawn) do
       if math.random() < 0.7 and v.ability.sometimes_face_down and v.facing ~= "back" then
         v:flip()
       end

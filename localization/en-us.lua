@@ -174,7 +174,8 @@ return {
       bl_hypb_final_epoch = {
         name = "HSB#1# EPOCH",
         text = {
-            "big #1#"
+            "Every second change",
+            "blind size by #2#%"
         },
       },
       bl_hypb_final_ethos = {
