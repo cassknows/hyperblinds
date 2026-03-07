@@ -45,7 +45,7 @@ SMODS.current_mod.reset_game_globals = function(run_start)
     G.GAME.hypb_evens = 0
     G.GAME.hypb_reign_sell = 1
     G.GAME.hypb_ichor_suit = "Hearts"
-    G.GAME.hypb_epoch_scale = -5
+    G.GAME.hypb_epoch_scale = -10
   end
 end
 

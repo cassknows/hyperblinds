@@ -2,7 +2,7 @@
 SMODS.Blind {
     key = "final_epoch",
     dollars = 8,
-    mult = 1,
+    mult = 2,
     atlas = "showdowns",
     pos = { x = 0, y = 4 },
     boss = {
@@ -14,10 +14,10 @@ SMODS.Blind {
         return { vars = { string.sub(tostring(G.GAME.hypb_global_time_var), -4), G.GAME.hypb_epoch_scale } } -- yes i know its not the actual MMSS, i'll adjust the exact parsing later
     end,
     collection_loc_vars = function(self)
-        return { vars = { 'MMSS', "-5" } }
+        return { vars = { 'MMSS', "-10" } }
     end,
     calculate = function (self, card, context)
-        if context.setting_blind then G.GAME.hypb_epoch_scale = -5 end
+        if context.setting_blind then G.GAME.hypb_epoch_scale = -10 end
     end
 }
 
