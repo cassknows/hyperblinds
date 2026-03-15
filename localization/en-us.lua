@@ -2,34 +2,34 @@ return {
   descriptions = {
     Blind = {
       bl_hypb_summit = {
-        name = "HB018 SUMMIT",
+        name = "HB-018 SUMMIT",
         text = {
             "Massive blind"
         }
       },
       bl_hypb_constrictor = {
-        name = "HB019 CONSTRICTOR",
+        name = "HB-019 CONSTRICTOR",
         text = {
             "After Play or Discard,",
             "always draw 1 card",
         }
       },
       bl_hypb_blind = {
-        name = "HB373 BLIND",
+        name = "HB-373 BLIND",
         text = {
             "All cards get",
             "drawn face down",
         }
       },
       bl_hypb_claw = {
-        name = "HB011 CLAW",
+        name = "HB-011 CLAW",
         text = {
             "Destroys 2 random cards",
             "in hand per hand played",
         }
       },
       bl_hypb_ursa = {
-        name = "HB563 URSA",
+        name = "HB-563 URSA",
         text = {
             "Playing a previously",
             "played hand sets",
@@ -37,7 +37,7 @@ return {
         },
       },
       bl_hypb_thread = {
-        name = "HB277 THREAD",
+        name = "HB-277 THREAD",
         text = {
             "Unspent Hands are",
             "removed after defeating",
@@ -45,35 +45,35 @@ return {
         },
       },
       bl_hypb_mace = {
-        name = "HB711 MACE",
+        name = "HB-711 MACE",
         text = {
             "Strips modifications",
             "from drawn Clubs",
         },
       },
       bl_hypb_clot = {
-        name = "HB722 CLOT",
+        name = "HB-722 CLOT",
         text = {
             "Strips modifications",
             "from drawn Hearts",
         },
       },
       bl_hypb_razor = {
-        name = "HB733 RAZOR",
+        name = "HB-733 RAZOR",
         text = {
             "Strips modifications",
             "from drawn Spades",
         },
       },
       bl_hypb_glint = {
-        name = "HB744 GLINT",
+        name = "HB-744 GLINT",
         text = {
             "Strips modifications",
             "from drawn Diamonds",
         },
       },
       bl_hypb_evergreen = {
-        name = "HB313 EVERGREEN",
+        name = "HB-313 EVERGREEN",
         text = {
             "All face cards are",
             "debuffed, convert #1# in #2#",
@@ -81,7 +81,7 @@ return {
         },
       },
       bl_hypb_sigil = {
-        name = "HB033 SIGIL",
+        name = "HB-033 SIGIL",
         text = {
             "All non-face cards are drawn",
             "face down, convert #1# in #2#",
@@ -89,7 +89,7 @@ return {
         },
       },
       bl_hypb_fang = {
-        name = "HB555 FANG",
+        name = "HB-555 FANG",
         text = {
             "Cards gain",
             "\"-$1 when scored\"",
@@ -97,21 +97,21 @@ return {
         },
       },
       bl_hypb_marble = {
-        name = "HB926 MARBLE",
+        name = "HB-926 MARBLE",
         text = {
             "Cards played previously",
             "are debuffed"
         },
       },
       bl_hypb_quartz = {
-        name = "HB510 QUARTZ",
+        name = "HB-510 QUARTZ",
         text = {
             "Base Chips and Mult",
             "are set to 0"
         },
       },
       bl_hypb_scapula = {
-        name = "HB641 SCAPULA",
+        name = "HB-641 SCAPULA",
         text = {
             "On Play or Discard",
             "decrease level of",
@@ -119,7 +119,7 @@ return {
         },
       },
       bl_hypb_alkahest = {
-        name = "HB050 ALKAHEST",
+        name = "HB-050 ALKAHEST",
         text = {
             "+1 Discard, -2 Hand Size,",
             "After Discard, permanently",
@@ -127,7 +127,7 @@ return {
         },
       },
       bl_hypb_polis = {
-        name = "HB323 POLIS",
+        name = "HB-323 POLIS",
         text = {
             "First hand is drawn face",
             "down, these cards may be",
@@ -135,7 +135,7 @@ return {
         },
       },
       bl_hypb_esca = {
-        name = "HB354 ESCA",
+        name = "HB-354 ESCA",
         text = {
             "Cards drawn face down after each",
             "hand played, these cards may be",
@@ -143,20 +143,20 @@ return {
         },
       },
       bl_hypb_tar = {
-        name = "HB654 TAR",
+        name = "HB-654 TAR",
         text = {
             "-2 hand size, permanently",
             "-1 hand size after hand played"
         },
       },
       bl_hypb_seer = {
-        name = "HB504 SEER",
+        name = "HB-504 SEER",
         text = {
             "Must play #1# cards"
         },
       },
       bl_hypb_flytrap = {
-        name = "HB923 FLYTRAP",
+        name = "HB-923 FLYTRAP",
         text = {
             "Only play 1 hand type this",
             "round, played hand type",
@@ -164,7 +164,7 @@ return {
         },
       },
       bl_hypb_iris = {
-        name = "HB145 IRIS",
+        name = "HB-145 IRIS",
         text = {
             "No repeat hand types this",
             "round, played hand types",
@@ -172,14 +172,14 @@ return {
         },
       },
       bl_hypb_final_epoch = {
-        name = "HSB1970 EPOCH",
+        name = "HSB-1970 EPOCH",
         text = {
             "Every second change",
             "blind size by #2#%"
         },
       },
       bl_hypb_final_ethos = {
-        name = "HSB1050 ETHOS",
+        name = "HSB-1050 ETHOS",
         text = {
             "Every #1# debuff a random",
             "#2#, #3# a hand",
@@ -187,7 +187,7 @@ return {
         },
       },
       bl_hypb_final_reign = {
-        name = "HSB7280 REIGN",
+        name = "HSB-7280 REIGN",
         text = {
             "All cards debuffed until",
             "#1# Joker(s) sold, +1 when",
@@ -195,14 +195,14 @@ return {
         },
       },
       bl_hypb_final_lethe = {
-        name = "HSB3848 LETHE",
+        name = "HSB-3848 LETHE",
         text = {
             "Shuffles and flips cards",
             "Whenever you select a card"
         },
       },
       bl_hypb_final_ichor = {
-        name = "HSB4231 ICHOR",
+        name = "HSB-4231 ICHOR",
         text = {
             "Can only select #1#",
             "Changes when cards drawn"
