@@ -172,7 +172,7 @@ return {
         },
       },
       bl_hypb_final_epoch = {
-        name = "HSB#1# EPOCH",
+        name = "HSB1970 EPOCH",
         text = {
             "Every second change",
             "blind size by #2#%"
